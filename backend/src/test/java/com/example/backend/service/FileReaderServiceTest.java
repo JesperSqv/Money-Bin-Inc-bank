@@ -21,7 +21,9 @@ public class FileReaderServiceTest {
         LoanApplication firstApplication = applications.get(0);
         Assertions.assertEquals("Juha", firstApplication.customer, "Customer name should match");
         Assertions.assertEquals(1000, firstApplication.totalLoan, "Total loan should match");
-        Assertions.assertEquals(5, firstApplication.interest, "Interest should match");
+        // Test the interest is now in the correct format.
+        Assertions.assertEquals(0.05, firstApplication.interest, "Interest should match");
+        Assertions.assertEquals(0.05, firstApplication.interest, "Interest should match");
         Assertions.assertEquals(2, firstApplication.years, "Years should match");
         
     }
