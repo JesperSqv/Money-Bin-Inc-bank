@@ -20,4 +20,25 @@ public class LoanApplication {
         this.years = years;
     }
 
+    public String getCustomer() {
+        return this.customer;
+    }
+
+    public double getTotalLoan() {
+        return this.totalLoan;
+    }
+
+    public double getInterest() {
+        return this.interest;
+    }
+
+    public int getYears() {
+        return this.years;
+    }
+
+    public String toOutputString(int prospectNumber, double monthlyPayment) {
+        return String.format("Prospect %d: %s wants to borrow %.2f € for a period of %d years and pay %.2f € each month",
+                             prospectNumber, customer, totalLoan, years, monthlyPayment);
+    }
+
 }
