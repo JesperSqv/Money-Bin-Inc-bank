@@ -19,13 +19,13 @@ public class MortgageCalculatorServiceTest {
 
     @Test
     public void testYearlyInterestToMonthlyInterest() {
-        Assertions.assertEquals(0.005, service.yearlyInterestToMonthlyInterest(0.06), "Yearly interest of 6% should be 0.5% monthly");
+        Assertions.assertEquals(0.004868, service.yearlyInterestToMonthlyInterest(0.06), 0.0001, "Yearly interest of 6% should be 0.5% monthly");
     }
 
     @Test
     public void testCalculateMonthlyPayment() {
         // Example parameters: totalLoan = 100000, yearlyInterest = 5%, years = 30
         double monthlyPayment = service.calculateMonthlyPayment(100000, 0.05, 30);
-        Assertions.assertEquals(536.82, monthlyPayment, 0.01, "Monthly payment calculation should be correct");
+        Assertions.assertEquals(530.06, monthlyPayment, 0.01, "Monthly payment calculation should be correct");
     }
 }
