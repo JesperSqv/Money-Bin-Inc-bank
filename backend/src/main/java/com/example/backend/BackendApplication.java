@@ -25,7 +25,7 @@ public class BackendApplication {
         printLoanApplications(applications, mortgageCalculatorService);
     }
 
-    private static void printLoanApplications(List<LoanApplication> applications, MortgageCalculatorService calculatorService) {
+    static void printLoanApplications(List<LoanApplication> applications, MortgageCalculatorService calculatorService) {
         int prospectNumber = 1;
         for (LoanApplication application : applications) {
             double monthlyPayment = calculatorService.calculateMonthlyPayment(
