@@ -38,6 +38,7 @@ public class LoanApplicationController {
     @PostMapping("/calculate")
     public LoanApplication calculateLoanApplication(@RequestBody LoanApplication application) {
         // Logic to calculate and return loan application details
+        // Todo
     }
 
     static ArrayList<String> stringLoanApplications(List<LoanApplication> applications, MortgageCalculatorService calculatorService) {
