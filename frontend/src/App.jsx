@@ -10,6 +10,12 @@ function App() {
   const [monthlyPayment, setMonthlyPayment] = useState('');
   const currentURL = window.location.href;
 
+  const TITLE = 'Money Bin Inc';
+
+  useEffect(() => {
+    document.title = TITLE
+ }, []);
+
   useEffect(() => {
     fetch('http://localhost:8080/api/loan-applications')
       .then(response => {
@@ -46,16 +52,17 @@ function App() {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(loanDetails)
-    });
-
-    if (!response.ok) {
-      const message = `An error has occurred: ${response.statusText}`;
-      console.error(message);
-      return;
-    }
-
-    const result = await response.json();
-    setMonthlyPayment(result);
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.text(); // Use .text() instead of .json() for plain string responses
+    })
+    .then(data => {
+      setMonthlyPayment(data);
+    })
+    .catch(error => console.error('Error fetching data:', error));    
   };
 
   return (

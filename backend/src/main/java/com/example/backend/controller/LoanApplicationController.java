@@ -19,12 +19,12 @@ import com.example.backend.service.LoanApplication;
 @RequestMapping("/api")
 public class LoanApplicationController {
 
-    private MortgageCalculatorService mortgageCalculatorService;
 
     @CrossOrigin(origins = "http://localhost:5173/")
     @GetMapping("/loan-applications")
     public ArrayList<String> getAllLoanApplicationsString() {
         // Logic to retrieve and return all loan applications
+        MortgageCalculatorService mortgageCalculatorService = new MortgageCalculatorService();
         FileReaderService fileReaderService = new FileReaderService();
         // Read loan applications
         String filename = "src/main/resources/prospects.txt";
@@ -33,12 +33,10 @@ public class LoanApplicationController {
         return stringList;
     }
 
-    public LoanApplicationController(MortgageCalculatorService mortgageCalculatorService) {
-        this.mortgageCalculatorService = mortgageCalculatorService;
-    }
-    
+    @CrossOrigin(origins = "http://localhost:5173/")
     @PostMapping("/calculate-mortgage")
     public ResponseEntity<String> calculateMortgage(@RequestBody LoanApplication loanApplication) {
+        MortgageCalculatorService mortgageCalculatorService = new MortgageCalculatorService();
         try {
             double monthlyPayment = mortgageCalculatorService.calculateMonthlyPayment(
                 loanApplication.getTotalLoan(), 
