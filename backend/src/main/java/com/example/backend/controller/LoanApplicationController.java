@@ -3,6 +3,7 @@ package com.example.backend.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,12 +19,13 @@ import com.example.backend.service.LoanApplication;
 @RequestMapping("/api")
 public class LoanApplicationController {
 
+    private MortgageCalculatorService mortgageCalculatorService;
+
     @CrossOrigin(origins = "http://localhost:5173/")
     @GetMapping("/loan-applications")
     public ArrayList<String> getAllLoanApplicationsString() {
         // Logic to retrieve and return all loan applications
         FileReaderService fileReaderService = new FileReaderService();
-        MortgageCalculatorService mortgageCalculatorService = new MortgageCalculatorService();
         // Read loan applications
         String filename = "src/main/resources/prospects.txt";
         List<LoanApplication> applications = fileReaderService.readLoanApplications(filename);
@@ -31,11 +33,25 @@ public class LoanApplicationController {
         return stringList;
     }
 
-    @PostMapping("/calculate")
-    public LoanApplication calculateLoanApplication(@RequestBody LoanApplication application) {
-        // Logic to calculate and return loan application details
-        // Todo
-        return application;
+    public LoanApplicationController(MortgageCalculatorService mortgageCalculatorService) {
+        this.mortgageCalculatorService = mortgageCalculatorService;
+    }
+    
+    @PostMapping("/calculate-mortgage")
+    public ResponseEntity<String> calculateMortgage(@RequestBody LoanApplication loanApplication) {
+        try {
+            double monthlyPayment = mortgageCalculatorService.calculateMonthlyPayment(
+                loanApplication.getTotalLoan(), 
+                loanApplication.getInterest(), 
+                loanApplication.getYears()
+            );
+            
+            // Format the monthly payment to a string with two decimal places
+            String result = String.format("The monthly payment is: %.2f", monthlyPayment);
+            return ResponseEntity.ok(result);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("There was an error processing your request");
+        }
     }
 
     static ArrayList<String> stringLoanApplications(List<LoanApplication> applications, MortgageCalculatorService calculatorService) {
