@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import backgroundImage from './assets/background.jpg'
 import moneyBinLogo from './assets/Logo.png'
 import './App.css'
@@ -14,7 +14,8 @@ function App() {
     backgroundSize: 'cover', 
     backgroundRepeat: 'repeat',
     width: '100%',
-    height: '100vh',
+    height: '100%',
+    boxShadow: '0 0 20px rgba(0, 0, 0, 0.5)',
   };
 
   const TITLE = 'Money Bin Inc';
@@ -22,6 +23,10 @@ function App() {
   useEffect(() => {
     document.title = TITLE
  }, []);
+
+  useLayoutEffect(() => {
+    document.body.style.backgroundColor = "gray"
+  });
 
   useEffect(() => {
     fetch('http://localhost:8080/api/loan-applications')
@@ -127,7 +132,7 @@ function App() {
             />
             <button type="submit">Calculate</button>
           </form>
-          {monthlyPayment && <p>{monthlyPayment}</p>}
+          {monthlyPayment && <p style={{ color: 'white' }}>{monthlyPayment}</p>}
         </header>
       </div>
     </div>
