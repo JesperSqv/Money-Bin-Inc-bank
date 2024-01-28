@@ -16,6 +16,7 @@ function App() {
     width: '100%',
     height: '100%',
     boxShadow: '0 0 20px rgba(0, 0, 0, 0.5)',
+    textShadow: '4px 4px 8px rgba(0, 0, 0, 0.9)',
   };
 
   const TITLE = 'Money Bin Inc';
@@ -131,7 +132,7 @@ function App() {
             />
             <button type="submit">Calculate</button>
           </form>
-          {monthlyPayment && <p style={{ color: 'white' }}>{monthlyPayment}</p>}
+          {monthlyPayment && <h3 style={{ color: 'white' }}>{monthlyPayment}</h3>}
         </header>
       </div>
     </div>

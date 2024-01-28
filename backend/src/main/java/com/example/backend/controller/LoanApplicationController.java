@@ -45,7 +45,7 @@ public class LoanApplicationController {
             );
             
             // Format the monthly payment to a string with two decimal places
-            String result = String.format("The monthly payment is: %.2f", monthlyPayment);
+            String result = String.format("The monthly payment is: %.2f €", monthlyPayment);
             return ResponseEntity.ok(result);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("There was an error processing your request");
