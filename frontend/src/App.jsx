@@ -88,7 +88,6 @@ function App() {
         <h1 style={{ color: 'white' }}>Money Bin Inc</h1>
         <div className="App">
         <header className="App-header">
-          <h1 style={{ color: 'white' }}>Loan Applications</h1>
           <p style={{ color: 'white' }}>Introducing Money Bin Inc - Where Customers Come First!
 
   At Money Bin Inc, we're proud to be your trusted financial partner, committed to putting your needs at the forefront. With a relentless focus on you, we've earned our reputation as the best customer-centric bank.
