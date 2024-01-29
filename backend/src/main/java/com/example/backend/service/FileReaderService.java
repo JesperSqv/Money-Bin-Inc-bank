@@ -5,22 +5,29 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.InputStreamReader;
+
+import org.springframework.core.io.ClassPathResource;
 
 public class FileReaderService {
 
     public List<LoanApplication> readLoanApplications(String filename) {
         List<LoanApplication> applications = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
-            String line;
-            br.readLine(); // Skip header line
-            while ((line = br.readLine()) != null) {
-                String[] values = parseLine(line);
-                if (values.length >= 4) {
-                    LoanApplication application = new LoanApplication(values[0], 
-                        Double.parseDouble(values[1]), 
-                        Double.parseDouble(values[2]), 
-                        Integer.parseInt(values[3]));
-                    applications.add(application);
+
+        try {
+            ClassPathResource resource = new ClassPathResource(filename);
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(resource.getInputStream()))) {
+                String line;
+                br.readLine(); // Skip header line
+                while ((line = br.readLine()) != null) {
+                    String[] values = parseLine(line);
+                    if (values.length >= 4) {
+                        LoanApplication application = new LoanApplication(values[0], 
+                            Double.parseDouble(values[1]), 
+                            Double.parseDouble(values[2]), 
+                            Integer.parseInt(values[3]));
+                        applications.add(application);
+                    }
                 }
             }
         } catch (IOException e) {

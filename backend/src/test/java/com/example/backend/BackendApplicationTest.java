@@ -15,7 +15,7 @@ public class BackendApplicationTest {
         MortgageCalculatorService mortgageCalculatorService = new MortgageCalculatorService();
 
         // Read test loan applications
-        String filename = "src/test/resources/prospects_test.txt"; // Use a test-specific file
+        String filename = "prospects.txt";; // Use a test-specific file
         List<LoanApplication> applications = fileReaderService.readLoanApplications(filename);
 
         int prospectNumber = 1;

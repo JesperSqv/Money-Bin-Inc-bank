@@ -27,7 +27,7 @@ public class LoanApplicationController {
         MortgageCalculatorService mortgageCalculatorService = new MortgageCalculatorService();
         FileReaderService fileReaderService = new FileReaderService();
         // Read loan applications
-        String filename = "src/main/resources/prospects.txt";
+        String filename = "prospects.txt";
         List<LoanApplication> applications = fileReaderService.readLoanApplications(filename);
         ArrayList<String> stringList = stringLoanApplications(applications, mortgageCalculatorService);
         return stringList;

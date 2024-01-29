@@ -11,7 +11,7 @@ public class FileReaderServiceTest {
     @Test
     public void testReadLoanApplications() {
         
-        String filename = "src/main/resources/prospects.txt";
+        String filename = "prospects.txt";
         List<LoanApplication> applications = fileReaderService.readLoanApplications(filename);
 
         // Check the number of applications read
@@ -32,7 +32,7 @@ public class FileReaderServiceTest {
     @Test
     public void testReadLoanApplicationsFurther() {
         
-        String filename = "src/main/resources/prospects.txt";
+        String filename = "prospects.txt";
         List<LoanApplication> applications = fileReaderService.readLoanApplications(filename);
 
         // Check the number of applications read
