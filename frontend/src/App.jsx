@@ -7,7 +7,13 @@ function App() {
   const [count, setCount] = useState(0)
   const [loanApplications, setLoanApplications] = useState([]);
   const [monthlyPayment, setMonthlyPayment] = useState('');
+
   const currentURL = window.location.href;
+
+  const apiLoanApps = 'api/loan-applications';
+  const apiLoanAppsUrl = currentURL + apiLoanApps;
+  const apiMortage = 'api/calculate-mortgage';
+  const apiMortageUrl = currentURL + apiMortage;
 
   const divStyle = {
     backgroundImage: `url(${backgroundImage})`,
@@ -30,7 +36,7 @@ function App() {
   });
 
   useEffect(() => {
-    fetch('http://localhost:8080/api/loan-applications')
+    fetch(apiLoanAppsUrl)
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -59,7 +65,7 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch('http://localhost:8080/api/calculate-mortgage', {
+    const response = await fetch(apiMortageUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
