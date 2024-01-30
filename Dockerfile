@@ -21,11 +21,11 @@ RUN chmod +x ./gradlew
 RUN ./gradlew build --info || ./gradlew build --stacktrace
 
 # Copy the React build output to the static resources directory in the Spring Boot application
-RUN ls -la /app
-COPY --from=build-frontend /app/dist /app/src/main/resources/static
+#RUN ls -la /app
+#COPY --from=build-frontend /app/dist /app/src/main/resources/static
 
 # Final stage: Create the Docker container with the Spring Boot application
 FROM openjdk:17  
 COPY --from=build-backend /app/build/libs/*.jar app.jar
-EXPOSE 8080
+EXPOSE 10000
 ENTRYPOINT ["java","-jar","/app.jar"]
